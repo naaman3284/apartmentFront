@@ -1,0 +1,40 @@
+<div class="list-container">
+  <h2>רשימת דירות</h2>
+
+  <div *ngIf="isLoading" class="loading-message">טוען דירות...</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <ng-container *ngIf="!isLoading && !errorMessage">
+    <div *ngIf="(apartments$ | async)?.length === 0" class="no-data-message">
+      אין דירות להצגה.
+    </div>
+
+    <table *ngIf="(apartments$ | async)?.length > 0" class="data-table">
+      <thead>
+        <tr>
+          <th>עיר</th>
+          <th>מספר חדרים</th>
+          <th>קומה</th>
+          <th>סוג</th>
+          <th>מחיר</th>
+          <th>פעולות</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let apartment of (apartments$ | async)">
+          <td>{{ apartment.city }}</td>
+          <td>{{ apartment.numRooms }}</td>
+          <td>{{ apartment.floor }}</td>
+          <td>{{ apartment.type }}</td>
+          <td>{{ apartment.amount | currency:'ILS':'symbol':'1.0-0' }}</td>
+          <td>
+            <button class="action-btn edit-btn" (click)="editApartment(apartment)">ערוך</button>
+            <button class="action-btn delete-btn" (click)="deleteApartment(apartment.id!)">מחק</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <button class="add-new-btn">הוסף דירה חדשה</button>
+  </div>

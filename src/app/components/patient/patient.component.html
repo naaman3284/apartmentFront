@@ -1,0 +1,38 @@
+<div class="list-container">
+  <h2>רשימת לקוחות</h2>
+
+  <div *ngIf="isLoading" class="loading-message">טוען לקוחות...</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <ng-container *ngIf="!isLoading && !errorMessage">
+    <div *ngIf="(patients$ | async)?.length === 0" class="no-data-message">
+      אין לקוחות להצגה.
+    </div>
+
+    <table *ngIf="(patients$ | async)?.length > 0" class="data-table">
+      <thead>
+        <tr>
+          <th>שם</th>
+          <th>טלפון</th>
+          <th>אימייל</th>
+          <th>כתובת</th>
+          <th>פעולות</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of (patients$ | async)">
+          <td>{{ patient.name }}</td>
+          <td>{{ patient.phoneNumber }}</td>
+          <td>{{ patient.email }}</td>
+          <td>{{ patient.address }}</td>
+          <td>
+            <button class="action-btn edit-btn" (click)="editPatient(patient)">ערוך</button>
+            <button class="action-btn delete-btn" (click)="deletePatient(patient.id!)">מחק</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <button class="add-new-btn">הוסף לקוח חדש</button>
+</div>

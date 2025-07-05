@@ -1,0 +1,38 @@
+<div class="list-container">
+  <h2>רשימת מתווכים</h2>
+
+  <div *ngIf="isLoading" class="loading-message">טוען מתווכים...</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <ng-container *ngIf="!isLoading && !errorMessage">
+    <div *ngIf="(brokers$ | async)?.length === 0" class="no-data-message">
+      אין מתווכים להצגה.
+    </div>
+
+    <table *ngIf="(brokers$ | async)?.length > 0" class="data-table">
+      <thead>
+        <tr>
+          <th>שם</th>
+          <th>טלפון</th>
+          <th>אימייל</th>
+          <th>כתובת</th>
+          <th>פעולות</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let broker of (brokers$ | async)">
+          <td>{{ broker.name }}</td>
+          <td>{{ broker.phoneNumber }}</td>
+          <td>{{ broker.email }}</td>
+          <td>{{ broker.address }}</td>
+          <td>
+            <button class="action-btn edit-btn" (click)="editBroker(broker)">ערוך</button>
+            <button class="action-btn delete-btn" (click)="deleteBroker(broker.id!)">מחק</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <button class="add-new-btn">הוסף מתווך חדש</button>
+</div>

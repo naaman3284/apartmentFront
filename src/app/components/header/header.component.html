@@ -1,0 +1,28 @@
+<header class="app-header">
+  <div class="logo">
+    <img src="assets/logo.png" alt="לוגו המערכת" routerLink="/home" />
+  </div>
+
+  <nav class="nav-links">
+    <ng-container *ngIf="!isLoggedIn">
+      <button class="nav-btn" routerLink="/login">כניסה</button>
+      <button class="nav-btn" routerLink="/register">הרשמה</button>
+    </ng-container>
+
+    <ng-container *ngIf="isLoggedIn">
+      <button class="nav-btn" routerLink="/apartments">דירות</button>
+
+      <ng-container *ngIf="userRole === 'admin' || userRole === 'broker'">
+        <button class="nav-btn" routerLink="/brokers">מתווכים</button>
+      </ng-container>
+
+      <ng-container *ngIf="userRole === 'admin' || userRole === 'client'">
+        <button class="nav-btn" routerLink="/patients">לקוחות</button>
+      </ng-container>
+
+      <button class="nav-btn" routerLink="/about">אודות</button>
+
+      <button class="nav-btn logout-btn" (click)="logout()">התנתק</button>
+    </ng-container>
+  </nav>
+</header>

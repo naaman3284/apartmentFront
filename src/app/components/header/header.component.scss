@@ -1,0 +1,69 @@
+/* src/app/core/components/header/header.component.scss */
+.app-header {
+  display: flex;
+  justify-content: space-between; /* רווח בין הלוגו לקישורי ניווט */
+  align-items: center; /* יישור אנכי למרכז */
+  padding: 15px 30px;
+  background-color: #333; /* צבע רקע כהה לכותרת */
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap; /* מאפשר אלמנטים לעבור לשורה הבאה במסכים קטנים */
+}
+
+.logo {
+  cursor: pointer;
+  img {
+    height: 40px; /* גובה הלוגו */
+    width: auto;
+    display: block; /* כדי להסיר רווחים מיותרים מתחת לתמונה */
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px; /* רווח בין הכפתורים */
+  flex-wrap: wrap; /* מאפשר לכפתורים לעבור לשורה הבאה במסכים קטנים */
+  justify-content: center; /* יישור מרכזי במסכים קטנים */
+}
+
+.nav-btn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid transparent; /* גבול שקוף להתחלה */
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  &:hover {
+    background-color: #555; /* צבע רקע בהובר */
+    border-color: #777; /* גבול בהובר */
+  }
+
+  &.logout-btn {
+    background-color: #dc3545; /* אדום ליציאה */
+    &:hover {
+      background-color: #c82333;
+    }
+  }
+}
+
+/* עיצוב רספונסיבי בסיסי */
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column; /* בעמודות במסכים קטנים */
+    align-items: center;
+  }
+  .logo {
+    margin-bottom: 15px;
+  }
+  .nav-links {
+    width: 100%;
+    justify-content: space-around; /* רווח שווה בין הכפתורים */
+  }
+  .nav-btn {
+    flex: 1; /* כפתורים יתפרסו על כל הרוחב הזמין */
+    max-width: 150px; /* הגבלה כדי שלא יהיו גדולים מדי */
+  }
+}
