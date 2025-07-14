@@ -19,8 +19,8 @@ import { ApartmeneService } from '../../service/Apartment.service';
 
 @Component({
   selector: 'app-apartment-list',
-  templateUrl: './apartment-list.component.html',
-  styleUrls: ['./apartment-list.component.scss'],
+  templateUrl: './apartment.component.html',
+  styleUrls: ['./apartment.component.scss'],
   standalone: true, // חשוב: הגדרת הקומפוננטה כ-standalone
   imports: [
     CommonModule // הוסף את CommonModule

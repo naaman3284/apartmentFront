@@ -18,8 +18,8 @@ import { BrokerService } from '../../service/Broker.service';
 
 @Component({
   selector: 'app-broker-list',
-  templateUrl: './broker-list.component.html',
-  styleUrls: ['./broker-list.component.scss'],
+  templateUrl: './broker.component.html',
+  styleUrls: ['./broker.component.scss'],
   standalone: true,
   imports: [
     CommonModule
@@ -60,12 +60,12 @@ export class BrokerListComponent implements OnInit {
 
   deleteBroker(id: number): void {
     if (confirm('האם אתה בטוח שברצונך למחוק מתווך זה?')) {
-      this.brokerService.(id).subscribe({
+      this.brokerService.delete(id).subscribe({
         next: () => {
           console.log('Broker deleted successfully');
           this.loadBrokers();
         },
-        error: (error) => {
+        error: (error:any) => {
           console.error('Error deleting broker:', error);
           this.errorMessage = 'שגיאה במחיקת המתווך.';
         }

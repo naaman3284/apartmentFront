@@ -40,17 +40,32 @@ export class BrokerService {
             })
         );
     }
-     delete(): Observable<any> { // החלף ב-LoginRequest Model
-        return this.http.delete<any>(`${this.apiUrl}`, {
-            // headers:{'b\/'}
-        }).pipe( // החלף ב-LoginResponse Model
-            tap(response => {
-                console.log(response)
-                // שמור את הטוקן ב-localStorage או ב-sessionStorage
-                this.isAuthenticatedSubject.next(true);
-            })
-        );
-    }
+    //  delete(): Observable<any> { // החלף ב-LoginRequest Model
+    //     return this.http.delete<any>(`${this.apiUrl}`, {
+    //         // headers:{'b\/'}
+    //     }).pipe( // החלף ב-LoginResponse Model
+    //         tap(response => {
+    //             console.log(response)
+    //             // שמור את הטוקן ב-localStorage או ב-sessionStorage
+    //             this.isAuthenticatedSubject.next(true);
+    //         })
+    //     );
+    // }
+    // בקובץ השירות (לדוגמה: src/app/service/broker.service.ts, אם זה קשור לברוקרים)
+// שימו לב: אם זו פונקציית DELETE כללית, ייתכן שתצטרכו לשקול שם אחר
+// או להפוך אותה ליותר גנרית.
+
+// כדי לתקן את השגיאה הנוכחית:
+delete(id: number): Observable<any> { // שיניתי את השם ל-deleteBroker כדי שלא יתנגש עם delete כללי
+    return this.http.delete<any>(`${this.apiUrl}/${id}`).pipe( // הוספתי /${id} ל-URL
+        tap(response => {
+            console.log(response);
+            // הקוד של this.isAuthenticatedSubject.next(true); נראה לא קשור לפונקציית מחיקה,
+            // אלא יותר לפונקציית login. אולי תרצה להסיר אותו מכאן.
+            // this.isAuthenticatedSubject.next(true); // שקול אם זה מתאים כאן
+        })
+    );
+}
      post(): Observable<any> { // החלף ב-LoginRequest Model
         return this.http.post<any>(`${this.apiUrl}`, {
             // headers:{'b\/'}

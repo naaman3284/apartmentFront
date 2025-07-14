@@ -9,7 +9,7 @@
       אין דירות להצגה.
     </div>
 
-    <table *ngIf="(apartments$ | async)?.length > 0" class="data-table">
+    <table *ngIf="(apartments$ | async)!.length > 0" class="data-table">
       <thead>
         <tr>
           <th>עיר</th>
@@ -25,7 +25,7 @@
           <td>{{ apartment.city }}</td>
           <td>{{ apartment.numRooms }}</td>
           <td>{{ apartment.floor }}</td>
-          <td>{{ apartment.type }}</td>
+          <!-- <td>{{ apartment.type }}</td> -->
           <td>{{ apartment.amount | currency:'ILS':'symbol':'1.0-0' }}</td>
           <td>
             <button class="action-btn edit-btn" (click)="editApartment(apartment)">ערוך</button>
